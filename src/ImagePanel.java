@@ -7,6 +7,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Paint;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
@@ -28,7 +32,7 @@ import javax.annotation.Resource;
 public class ImagePanel extends Pane {
     
 
-   private Color color;
+   private Paint color;
    private double width, height;
    
    public ImagePanel(double width, double height)
@@ -53,7 +57,7 @@ public class ImagePanel extends Pane {
     setBackgroundColour(color);
   }
 
-  public void setColour(Color color)
+  public void setColour(Paint color)
   {
       this.color = color;
   }
@@ -115,6 +119,11 @@ public class ImagePanel extends Pane {
     ellipse.setStroke(color);
     this.getChildren().add(ellipse);
   }
+
+    void setGradient(Color color1, Color color2) {
+        Stop[] stops = new Stop[] { new Stop(0, color1), new Stop(1, color2)};
+        color = new LinearGradient(0, 0, this.getWidth(), 0, false, CycleMethod.NO_CYCLE, stops);
+    }
     
     
 }

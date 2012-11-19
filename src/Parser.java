@@ -26,6 +26,7 @@ public class Parser
   private String line;
   private Button next;
   private Stage primary;
+    private String colorNames;
 
   public Parser(Reader reader, ImagePanel image, MainWindow frame, Stage primary)
   {
@@ -324,6 +325,36 @@ public class Parser
     throw new ParseException("Invalid colour name");
   }
 
+  private void setGradient(String colours) throws ParseException
+  {
+      int x = 0;
+      String[] colourName = new String[2];
+      Color[] color = new Color[2];
+      StringTokenizer coloursTokenizer = new StringTokenizer(colours);
+      
+      while (coloursTokenizer.hasMoreTokens()) {
+         colourName[x] = coloursTokenizer.nextToken();
+         x += 1;
+     }
+     
+    if (colourName.equals("black")) { image.setColour(Color.BLACK); return;}
+    if (colourName.equals("blue")) { image.setColour(Color.BLUE); return;}
+    if (colourName.equals("cyan")) { image.setColour(Color.CYAN); return;}
+    if (colourName.equals("darkgray")) { image.setColour(Color.DARKGRAY); return;}
+    if (colourName.equals("gray")) { image.setColour(Color.GRAY); return;}
+    if (colourName.equals("green")) { image.setColour(Color.GREEN); return;}
+    if (colourName.equals("lightgray")) { image.setColour(Color.LIGHTGRAY); return;}
+    if (colourName.equals("magenta")) { image.setColour(Color.MAGENTA); return;}
+    if (colourName.equals("orange")) { image.setColour(Color.ORANGE); return;}
+    if (colourName.equals("pink")) { image.setColour(Color.PINK); return;}
+    if (colourName.equals("red")) { image.setColour(Color.RED); return;}
+    if (colourName.equals("white")) { image.setColour(Color.WHITE); return;}
+    if (colourName.equals("yellow")) { image.setColour(Color.YELLOW); return;}
+    throw new ParseException("Invalid colour name");
+  }
+
+  
+  
   private int getInteger(StringTokenizer tokenizer) throws ParseException
   {
     if (tokenizer.hasMoreTokens())
