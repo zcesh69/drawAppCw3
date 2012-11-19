@@ -60,6 +60,7 @@ public class ImagePanel extends Pane {
   public void setColour(Paint color)
   {
       this.color = color;
+      
   }
 
   public void drawLine(int x1, int y1, int x2, int y2)

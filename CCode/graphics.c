@@ -63,6 +63,48 @@ void setColour(colour c)
   printf("SC %s\n", colourName);
 }
 
+void setColourGradient(colour a, colour b)
+{
+    char* colourName1;
+    char* colourName2;
+    switch(a)
+    {
+        case black : colourName1 = "black"; break;
+        case blue : colourName1 = "blue"; break;
+        case cyan : colourName1 = "cyan"; break;
+        case darkgray : colourName1 = "darkgray"; break;
+        case gray : colourName1 = "gray"; break;
+        case green : colourName1 = "green"; break;
+        case lightgray : colourName1 = "lightgray"; break;
+        case magenta : colourName1 = "magenta"; break;
+        case orange : colourName1 = "orange"; break;
+        case pink : colourName1 = "pink"; break;
+        case red : colourName1 = "red"; break;
+        case white : colourName1 = "white"; break;
+        case yellow : colourName1 = "yellow"; break;
+    }
+    
+    switch(b)
+    {
+        case black : colourName2 = "black"; break;
+        case blue : colourName2 = "blue"; break;
+        case cyan : colourName2 = "cyan"; break;
+        case darkgray : colourName2 = "darkgray"; break;
+        case gray : colourName2 = "gray"; break;
+        case green : colourName2 = "green"; break;
+        case lightgray : colourName2 = "lightgray"; break;
+        case magenta : colourName2 = "magenta"; break;
+        case orange : colourName2 = "orange"; break;
+        case pink : colourName2 = "pink"; break;
+        case red : colourName2 = "red"; break;
+        case white : colourName2 = "white"; break;
+        case yellow : colourName2 = "yellow"; break;
+    }
+    
+    printf("SG %s %s\n", colourName1,colourName2);
+    
+}
+
 void saveImage(void)
 {
     printf("SI");
@@ -73,13 +115,20 @@ int main(int argc, char* argv)
 {
     
     drawRect(10,10,20,20);
-    drawOval(35,35,5,10);
+    fillRect(20,20,50,40);
+    setColour(blue);
+    
+    setDimension(700,700);
+    fillRect(200,300,50,40);
+    
+    setColourGradient(green,yellow);
+    
+    fillRect(400,200,50,40);
     drawString("hahahha", 100, 100);
     drawImage(30, 30, 100, 100, "/123.png");
     
     drawLine(10,30,500,450);
     
-    setDimension(700,700);
     saveImage();
     return 1;
 }

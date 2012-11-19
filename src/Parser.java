@@ -97,6 +97,7 @@ public class Parser
     String command = line.substring(0, 2);
     
     if (command.equals("SI") && command.length() == 2 ) { saveImage(); return; } 
+    if (command.equals("SG")) { setGradient(line.substring(2,line.length())); return; } 
     if (command.equals("SD")) { setDimension(line.substring(2,line.length())); return; }
     if (command.equals("DL")) { drawLine(line.substring(2,line.length())); return; }
     if (command.equals("DR")) { drawRect(line.substring(2, line.length())); return; }
@@ -309,20 +310,25 @@ public class Parser
 
   private void setColour(String colourName) throws ParseException
   {
-    if (colourName.equals("black")) { image.setColour(Color.BLACK); return;}
-    if (colourName.equals("blue")) { image.setColour(Color.BLUE); return;}
-    if (colourName.equals("cyan")) { image.setColour(Color.CYAN); return;}
-    if (colourName.equals("darkgray")) { image.setColour(Color.DARKGRAY); return;}
-    if (colourName.equals("gray")) { image.setColour(Color.GRAY); return;}
-    if (colourName.equals("green")) { image.setColour(Color.GREEN); return;}
-    if (colourName.equals("lightgray")) { image.setColour(Color.LIGHTGRAY); return;}
-    if (colourName.equals("magenta")) { image.setColour(Color.MAGENTA); return;}
-    if (colourName.equals("orange")) { image.setColour(Color.ORANGE); return;}
-    if (colourName.equals("pink")) { image.setColour(Color.PINK); return;}
-    if (colourName.equals("red")) { image.setColour(Color.RED); return;}
-    if (colourName.equals("white")) { image.setColour(Color.WHITE); return;}
-    if (colourName.equals("yellow")) { image.setColour(Color.YELLOW); return;}
+    if (colourName.equals("black")) { image.setColour(Color.BLACK); showColor(colourName); return;}
+    if (colourName.equals("blue")) { image.setColour(Color.BLUE); showColor(colourName); return;}
+    if (colourName.equals("cyan")) { image.setColour(Color.CYAN); showColor(colourName); return;}
+    if (colourName.equals("darkgray")) { image.setColour(Color.DARKGRAY); showColor(colourName); return;}
+    if (colourName.equals("gray")) { image.setColour(Color.GRAY); showColor(colourName); return;}
+    if (colourName.equals("green")) { image.setColour(Color.GREEN); showColor(colourName); return;}
+    if (colourName.equals("lightgray")) { image.setColour(Color.LIGHTGRAY); showColor(colourName); return;}
+    if (colourName.equals("magenta")) { image.setColour(Color.MAGENTA); showColor(colourName); return;}
+    if (colourName.equals("orange")) { image.setColour(Color.ORANGE); showColor(colourName); return;}
+    if (colourName.equals("pink")) { image.setColour(Color.PINK); showColor(colourName); return;}
+    if (colourName.equals("red")) { image.setColour(Color.RED); showColor(colourName); return;}
+    if (colourName.equals("white")) { image.setColour(Color.WHITE); showColor(colourName); return;}
+    if (colourName.equals("yellow")) { image.setColour(Color.YELLOW); showColor(colourName); return;}
     throw new ParseException("Invalid colour name");
+  }
+  
+  private void showColor(String str)
+  {
+      frame.postMessage("Color " + str +" has been set !");
   }
 
   private void setGradient(String colours) throws ParseException
@@ -335,22 +341,43 @@ public class Parser
       while (coloursTokenizer.hasMoreTokens()) {
          colourName[x] = coloursTokenizer.nextToken();
          x += 1;
-     }
+      }
      
-    if (colourName.equals("black")) { image.setColour(Color.BLACK); return;}
-    if (colourName.equals("blue")) { image.setColour(Color.BLUE); return;}
-    if (colourName.equals("cyan")) { image.setColour(Color.CYAN); return;}
-    if (colourName.equals("darkgray")) { image.setColour(Color.DARKGRAY); return;}
-    if (colourName.equals("gray")) { image.setColour(Color.GRAY); return;}
-    if (colourName.equals("green")) { image.setColour(Color.GREEN); return;}
-    if (colourName.equals("lightgray")) { image.setColour(Color.LIGHTGRAY); return;}
-    if (colourName.equals("magenta")) { image.setColour(Color.MAGENTA); return;}
-    if (colourName.equals("orange")) { image.setColour(Color.ORANGE); return;}
-    if (colourName.equals("pink")) { image.setColour(Color.PINK); return;}
-    if (colourName.equals("red")) { image.setColour(Color.RED); return;}
-    if (colourName.equals("white")) { image.setColour(Color.WHITE); return;}
-    if (colourName.equals("yellow")) { image.setColour(Color.YELLOW); return;}
-    throw new ParseException("Invalid colour name");
+    if (colourName[0].equals("black")) { color[0] = (Color.BLACK);}
+    else if (colourName[0].equals("blue")) { color[0] = (Color.BLUE);}
+    else if (colourName[0].equals("cyan")) { color[0] = (Color.CYAN);}
+    else if (colourName[0].equals("darkgray")) { color[0] = (Color.DARKGRAY);}
+    else if (colourName[0].equals("gray")) { color[0] = (Color.GRAY);}
+    else if (colourName[0].equals("green")) { color[0] = (Color.GREEN); }
+    else if (colourName[0].equals("lightgray")) { color[0] = (Color.LIGHTGRAY);}
+    else if (colourName[0].equals("magenta")) { color[0] = (Color.MAGENTA);}
+    else if (colourName[0].equals("orange")) { color[0] = (Color.ORANGE);}
+    else if (colourName[0].equals("pink")) { color[0] = (Color.PINK);}
+    else if (colourName[0].equals("red")) { color[0] = (Color.RED); }
+    else if (colourName[0].equals("white")) { color[0] = (Color.WHITE);}
+    else if (colourName[0].equals("yellow")) { color[0] = (Color.YELLOW);}
+    else throw new ParseException("Invalid left start colour name");
+    
+    if (colourName[1].equals("black")) { color[1] = (Color.BLACK); }
+    else if (colourName[1].equals("blue")) { color[1] = (Color.BLUE); }
+    else if (colourName[1].equals("cyan")) { color[1] = (Color.CYAN); }
+    else if (colourName[1].equals("darkgray")) { color[1] = (Color.DARKGRAY); }
+    else if (colourName[1].equals("gray")) { color[1] = (Color.GRAY); }
+    else if (colourName[1].equals("green")) { color[1] = (Color.GREEN); }
+    else if (colourName[1].equals("lightgray")) { color[1] = (Color.LIGHTGRAY); }
+    else if (colourName[1].equals("magenta")) { color[1] = (Color.MAGENTA); }
+    else if (colourName[1].equals("orange")) { color[1] = (Color.ORANGE); }
+    else if (colourName[1].equals("pink")) { color[1] = (Color.PINK); }
+    else if (colourName[1].equals("red")) { color[1] = (Color.RED); }
+    else if (colourName[1].equals("white")) { color[1] = (Color.WHITE); }
+    else if (colourName[1].equals("yellow")) { color[1] = (Color.YELLOW); }
+    else throw new ParseException("Invalid right start colour name");
+    
+    frame.postMessage("Color gradient has been successfully set !");
+    image.setGradient(color[0], color[1]);
+    
+    
+    
   }
 
   

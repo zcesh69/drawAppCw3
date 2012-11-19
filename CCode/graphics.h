@@ -12,3 +12,4 @@ void setDimension(int, int);
 void saveImage(void);
 
 void setColour(colour);
+void setColourGradient(colour,colour);
