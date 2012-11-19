@@ -10,6 +10,8 @@ void drawString(char*,int,int);
 void drawImage(int, int, int, int, char*);
 void setDimension(int, int);
 void saveImage(void);
+void moveForward(int);
+void rotateTurtle(int,char*);
 
 void setColour(colour);
 void setColourGradient(colour,colour);

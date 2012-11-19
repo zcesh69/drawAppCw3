@@ -97,6 +97,8 @@ public class Parser
     String command = line.substring(0, 2);
     
     if (command.equals("SI") && command.length() == 2 ) { saveImage(); return; } 
+    if (command.equals("MF")) { moveForward(line.substring(2,line.length())); return;}
+    if (command.equals("RT")) { rotateTurtle(line.substring(2,line.length())); return;}
     if (command.equals("SG")) { setGradient(line.substring(2,line.length())); return; } 
     if (command.equals("SD")) { setDimension(line.substring(2,line.length())); return; }
     if (command.equals("DL")) { drawLine(line.substring(2,line.length())); return; }
@@ -112,6 +114,8 @@ public class Parser
     throw new ParseException("Unknown drawing command");
   }
 
+  
+  
   private void saveImage() 
   {
       WritableImage toSave = image.snapshot(new SnapshotParameters(), null); 
@@ -153,6 +157,53 @@ public class Parser
     primary.setHeight(height);
     frame.reDraw(wDiff,hDiff);
   }
+  
+  private void moveForward(String args) throws ParseException
+  {
+      int pixels = 0;
+      
+      StringTokenizer tokenizer = new StringTokenizer(args);
+      
+      try {
+          pixels = getInteger(tokenizer);
+          
+      } catch (ParseException ex) {
+          String errorMsg = ex.getMessage();
+          errorMsg = errorMsg.concat(". Tokenizer exception happens at MoveForward method");
+          throw new ParseException(errorMsg); 
+      }
+      image.moveForward(pixels);
+  }
+  
+  private void rotateTurtle(String args) throws ParseException
+  {
+      int degree = 0;
+      String direction = "";
+      int leftright = 0;
+      
+      StringTokenizer tokenizer = new StringTokenizer(args);
+              
+      try {
+          degree = getInteger(tokenizer);
+      } catch (ParseException ex)
+      {
+          String errorMsg = ex.getMessage();
+          errorMsg = errorMsg.concat(". Tokenizer exception happens at RotateTurtle method");
+          throw new ParseException(errorMsg);
+      }
+      int position = args.indexOf("@");
+      if (position == -1) throw new ParseException(". rotateTurle : direction is missing");
+      direction = args.substring(position+1,args.length());
+      if (!direction.equals("left") && (!direction.equals("right")))
+      {
+          throw new ParseException(". Please enter direction of rotation with left or right only.");
+      }
+      if (direction.equals("left")) {leftright = 0;}
+      if (direction.equals("right")) {leftright = 1;}
+      image.rotateTurtle(degree,leftright);
+              
+  }
+  
   
   private void drawLine(String args) throws ParseException
   {

@@ -105,6 +105,16 @@ void setColourGradient(colour a, colour b)
     
 }
 
+void moveForward(int pixels)
+{
+    printf("MF %i \n",pixels);
+}
+
+void rotateTurtle(int degree, char* direction)
+{
+    printf("RT %i @%s\n",degree,direction);
+}
+
 void saveImage(void)
 {
     printf("SI");
@@ -118,8 +128,16 @@ int main(int argc, char* argv)
     fillRect(20,20,50,40);
     setColour(blue);
     
+    moveForward(20);
+    rotateTurtle(120,"right");
+    moveForward(100);
+    
     setDimension(700,700);
     fillRect(200,300,50,40);
+    
+
+    rotateTurtle(120,"left");
+    moveForward(100);
     
     setColourGradient(green,yellow);
     
