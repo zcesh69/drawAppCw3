@@ -234,8 +234,6 @@ public class ImagePanel extends Pane {
         if (currentAngle == 270){ x = 0; y = pixels; }
         
         
-        //Translate move = new Translate(x , y);
-        //currentNode.getTransforms().add(move);
         
         TranslateTransition tt = new TranslateTransition(Duration.millis(3000), currentNode);
         tt.setByX(x);
